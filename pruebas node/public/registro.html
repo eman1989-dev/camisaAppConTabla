@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>Registro de nuevos usuarios</title>
+    </head>
+    <body>
+        <input type="text" id="txt_nombre" placeholder="Escriba el nombre">
+        <input type="email" id="txt_email" placeholder="Escriba el correo">
+        <input type="password" id="txt_clave" placeholder="Escriba la contraseña">
+
+        <input type="button" value="Registrarse" onclick="registro()">
+        <script type="text/javascript">
+            function registro(){
+                nombreinput = document.getElementById("txt_nombre").value;
+                emailinput = document.getElementById("txt_email").value;
+                passinput = document.getElementById("txt_clave").value;
+                fetch('/api/usuarios', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombre: nombreinput, email: emailinput, clave: passinput })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Usuario creado:', data);
+                        alert("Usuario creado");
+                    });
+
+            }
+        </script>
+    </body>
+</html>
